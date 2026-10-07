@@ -1,0 +1,81 @@
+name: Release
+
+# A tag `vX.Y.Z` publishes that version. Before tagging, on your machine:
+#
+#   1. bump "version" in filex-app.json and write its CHANGELOG.md section
+#   2. bash scripts/build.sh --stamp     (the bundle's and the module's sha256 into filex-app.json)
+#   3. commit filex-app.json and manifest.embed.json, tag vX.Y.Z, push the tag
+#
+# Here both are built again from the tag and must hash to what filex-app.json
+# pins - filex refuses a download whose sha256 differs. Then plugin.wasm,
+# ui.zip and filex-app.json are attached to the GitHub release, which is
+# where the manifest's addresses point; the release's notes are the
+# version's CHANGELOG.md section (tools/notes), what filex shows an
+# administrator when it offers the update.
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Use the toolchain go.mod pins
+        run: echo "GOTOOLCHAIN=$(sed -n 's/^toolchain //p' go.mod)" >> "$GITHUB_ENV"
+
+      - name: The tag is the manifest's version
+        run: |
+          want="${GITHUB_REF_NAME#v}"
+          have="$(jq -r .version filex-app.json)"
+          if [ "$want" != "$have" ]; then
+            echo "tag $GITHUB_REF_NAME, but filex-app.json says version $have" >&2
+            exit 1
+          fi
+
+      - name: The addresses are this repository's release
+        run: |
+          base="https://github.com/${GITHUB_REPOSITORY}/releases/download/{tag}"
+          for pair in "wasm.url plugin.wasm" "ui.bundle.url ui.zip"; do
+            set -- $pair
+            have="$(jq -r ".$1" filex-app.json)"
+            if [ "${have,,}" != "${base,,}/$2" ]; then
+              echo "$1 is $have; filex would download from there, not from this release" >&2
+              exit 1
+            fi
+          done
+
+      - name: CHANGELOG.md says what this version changes
+        run: |
+          mkdir -p dist
+          go run ./tools/notes "${GITHUB_REF_NAME#v}" > dist/release-notes.md
+
+      - name: Tests, then the bundle and the module
+        run: bash scripts/build.sh
+
+      - name: The committed hashes are this build's
+        run: go run ./tools/manifest check dist/ui.zip dist/plugin.wasm
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          body_path: dist/release-notes.md
+          files: |
+            dist/plugin.wasm
+            dist/plugin.wasm.sha256
+            dist/ui.zip
+            dist/ui.zip.sha256
+            dist/filex-app.json

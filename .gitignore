@@ -1,0 +1,17 @@
+# build output (a release attaches ui.zip and plugin.wasm; the repository does not carry them)
+dist/
+*.wasm
+*.wasm.sha256
+
+# Node (the page's tests need no packages; nothing is installed)
+node_modules/
+
+# editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# worktrees made inside the repository
+/.claude/worktrees/

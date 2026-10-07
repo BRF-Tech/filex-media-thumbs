@@ -1,0 +1,101 @@
+{
+  "manifest_version": 1,
+  "name": "media-thumbs",
+  "version": "0.1.0",
+  "filex": ">=0.50.0",
+  "label": {
+    "en": "Media Thumb Engine",
+    "tr": "Media Thumb Engine"
+  },
+  "description": {
+    "en": "Thumbnails and previews for design files and fonts: Photoshop (.psd, .psb), Affinity (.af, .afphoto, .afdesign, .afpub), Pixelmator Pro (.pxd) and fonts (.ttf, .otf, .woff, .woff2). It reads the picture each program saves inside its file, and draws a font with itself.",
+    "tr": "Tasarım dosyaları ve fontlar için küçük resimler ve önizlemeler: Photoshop (.psd, .psb), Affinity (.af, .afphoto, .afdesign, .afpub), Pixelmator Pro (.pxd) ve fontlar (.ttf, .otf, .woff, .woff2). Her programın kendi dosyasının içine kaydettiği resmi okur, bir fontu da kendisiyle çizer."
+  },
+  "homepage": "https://github.com/BRF-Tech/filex-media-thumbs",
+  "languages": [
+    "en",
+    "tr"
+  ],
+  "permissions": [
+    "files:read"
+  ],
+  "permission_reasons": {
+    "files:read": {
+      "en": "To read the one file you open in its preview: the picture the file carries, or the font itself. It reads no other file and writes nothing.",
+      "tr": "Önizlemesinde açtığınız tek dosyayı okumak için: dosyanın taşıdığı resmi ya da fontun kendisini. Başka hiçbir dosyayı okumaz, hiçbir şey yazmaz."
+    },
+    "ui": {
+      "en": "The preview is this app's own page: it runs in your browser, in the sandbox filex draws for it, with no network.",
+      "tr": "Önizleme bu uygulamanın kendi sayfasıdır: tarayıcınızda, filex'in onun için çizdiği yalıtım alanında, ağ erişimi olmadan çalışır."
+    }
+  },
+  "limits": {
+    "memory_pages": 2048,
+    "call_timeout_s": 30
+  },
+  "thumbnails": {
+    "applies": {
+      "kind": "file",
+      "ext": [
+        "af",
+        "afdesign",
+        "afphoto",
+        "afpub",
+        "otf",
+        "psb",
+        "psd",
+        "pxd",
+        "ttf",
+        "woff",
+        "woff2"
+      ]
+    }
+  },
+  "views": [
+    {
+      "id": "design",
+      "placement": "viewer",
+      "ui": "index.html",
+      "label": {
+        "en": "Design preview",
+        "tr": "Tasarım önizlemesi"
+      },
+      "applies": {
+        "kind": "file",
+        "ext": [
+          "af",
+          "afdesign",
+          "afphoto",
+          "afpub",
+          "psb",
+          "psd",
+          "pxd"
+        ]
+      }
+    },
+    {
+      "id": "font",
+      "placement": "viewer",
+      "ui": "index.html",
+      "label": {
+        "en": "Font preview",
+        "tr": "Font önizlemesi"
+      },
+      "applies": {
+        "kind": "file",
+        "ext": [
+          "otf",
+          "ttf",
+          "woff",
+          "woff2"
+        ]
+      }
+    }
+  ],
+  "ui": {
+    "bundle": {
+      "url": "https://github.com/BRF-Tech/filex-media-thumbs/releases/download/{tag}/ui.zip",
+      "sha256": "a00ce44dd7ec43b630d15694109fd54b8a2dcfb64da635b806b566f6f48b9fc8"
+    }
+  }
+}

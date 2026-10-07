@@ -1,0 +1,12 @@
+{
+  "name": "filex-media-thumbs-ui",
+  "private": true,
+  "type": "module",
+  "description": "The preview page of Media Thumb Engine (ui/). No dependencies: its tests run on Node's own test runner.",
+  "scripts": {
+    "test": "node --test ui/test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

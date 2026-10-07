@@ -1,0 +1,13 @@
+* text=auto eol=lf
+*.wasm binary
+*.zip binary
+*.png binary
+*.webp binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.psd binary
+*.af binary
+# a Pixelmator Pro file is a ZIP; the Cython sample beside it is text
+testdata/samples/icon.pxd binary
+testdata/samples/cython.pxd text eol=lf

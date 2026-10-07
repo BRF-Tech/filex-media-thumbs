@@ -1,0 +1,345 @@
+/*
+ * Media Thumb Engine's preview page. The colours are filex's: the SDK puts
+ * filex's `--fe-*` tokens, `data-theme` and `color-scheme` on <html> and
+ * keeps them current, so the page reads like the explorer around it in light
+ * and dark. The values after each token are the stock light palette, for a
+ * frame that has not been told yet.
+ */
+:root {
+  color-scheme: light dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--fe-bg, #ffffff);
+  color: var(--fe-text, #1f2937);
+  font: 14px/1.5 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html[data-theme='dark'] body {
+  background: var(--fe-bg, #15171c);
+  color: var(--fe-text, #e5e7eb);
+}
+
+#app {
+  min-height: 100%;
+}
+
+.mt {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 24px 32px;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.mt-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mt-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+.mt--font .mt-title {
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+.mt-kind {
+  margin: 0;
+  font-size: 13px;
+  color: var(--fe-text-muted, #6b7280);
+}
+
+/* A face this page loaded is drawn as it is: never made bold or slanted by
+   the browser (a static font has one weight, and that is the one shown). */
+.mt-usefont {
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+}
+
+.mt-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 60vh;
+  padding: 24px;
+  color: var(--fe-text-muted, #6b7280);
+  text-align: center;
+}
+
+.mt-status--busy::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--fe-border, #e5e7eb);
+  border-top-color: var(--fe-primary, #2f6ceb);
+  animation: mt-spin 0.9s linear infinite;
+}
+
+@keyframes mt-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mt-status--busy::before {
+    animation: none;
+  }
+}
+
+/* ── a design file ─────────────────────────────────────────────────── */
+
+.mt-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+  gap: 24px;
+  align-items: start;
+}
+
+.mt-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.mt-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--fe-bg-elev, #f7f8fb);
+  border: 1px solid var(--fe-border, #e5e7eb);
+}
+
+/* The checkerboard is "no background", as on every transparent picture
+   filex draws. */
+.mt-picture {
+  display: block;
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  background: #fff repeating-conic-gradient(#e0e0e0 0% 25%, transparent 0% 50%) 50% / 16px 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+.mt-caption {
+  font-size: 12px;
+  color: var(--fe-text-muted, #6b7280);
+}
+
+.mt-problem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  padding: 24px;
+  border-radius: 8px;
+  background: var(--fe-bg-elev, #f7f8fb);
+  border: 1px dashed var(--fe-border-strong, #d1d5db);
+  color: var(--fe-text, #1f2937);
+  text-align: center;
+}
+
+.mt-problem p {
+  margin: 0;
+  max-width: 52ch;
+}
+
+.mt-about {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mt-explain,
+.mt-hint,
+.mt-note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--fe-text-muted, #6b7280);
+}
+
+.mt-facts {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.mt-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.mt-fact dt {
+  color: var(--fe-text-muted, #6b7280);
+  font-size: 12px;
+}
+
+.mt-fact dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.mt-facts--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+
+.mt-facts--inline .mt-fact {
+  flex-direction: row;
+  gap: 6px;
+  align-items: baseline;
+}
+
+/* ── a font ────────────────────────────────────────────────────────── */
+
+.mt-sample-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--fe-text-muted, #6b7280);
+}
+
+.mt-sample-input {
+  font: inherit;
+  font-size: 14px;
+  color: var(--fe-text, #1f2937);
+  background: var(--fe-bg, #ffffff);
+  border: 1px solid var(--fe-border, #e5e7eb);
+  border-radius: 6px;
+  padding: 7px 10px;
+  min-width: 0;
+}
+
+.mt-sample-input:focus-visible {
+  outline: 2px solid var(--fe-primary, #2f6ceb);
+  outline-offset: 1px;
+}
+
+.mt-section h2 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fe-text-muted, #6b7280);
+}
+
+.mt-line {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-block: 4px;
+  border-block-end: 1px solid var(--fe-border, #e5e7eb);
+  min-width: 0;
+}
+
+.mt-tag {
+  flex: 0 0 auto;
+  min-width: 88px;
+  max-width: 40%;
+  font-size: 11px;
+  color: var(--fe-text-muted, #6b7280);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.mt-text {
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.mt-chars {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+  gap: 4px;
+  font-size: 24px;
+}
+
+.mt-chars li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: 1px solid var(--fe-border, #e5e7eb);
+  border-radius: 4px;
+  background: var(--fe-bg-elev, #f7f8fa);
+  overflow: hidden;
+}
+
+.mt-button {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--fe-border, #e5e7eb);
+  background: var(--fe-bg-elev, #f7f8fb);
+  color: var(--fe-text, #1f2937);
+  cursor: pointer;
+}
+
+.mt-button:hover {
+  border-color: var(--fe-primary, #2f6ceb);
+}
+
+.mt-button:focus-visible {
+  outline: 2px solid var(--fe-primary, #2f6ceb);
+  outline-offset: 1px;
+}
+
+/* ── narrow screens (a phone is 390 px) ───────────────────────────── */
+
+@media (max-width: 720px) {
+  .mt {
+    padding: 16px;
+  }
+  .mt-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mt--font .mt-title {
+    font-size: 28px;
+  }
+  .mt-tag {
+    min-width: 64px;
+  }
+  .mt-chars {
+    grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
+    font-size: 20px;
+  }
+}

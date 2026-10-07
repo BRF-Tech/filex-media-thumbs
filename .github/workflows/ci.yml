@@ -1,0 +1,56 @@
+name: CI
+
+# Every push to main and every pull request: gofmt, vet, the Go tests (the
+# readers, the manifest, the app against plugintest's fake filex), the
+# page's tests, the interface bundle and the wasm module. The build is kept
+# for a week, so a reviewer can install exactly what a pull request builds
+# (Admin → Plugins → Apps → Install an app → Upload files: plugin.wasm,
+# filex-app.json and ui.zip).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # The compiler scripts/build.sh forces, so the tests and the build here
+      # are the ones a release runs.
+      - name: Use the toolchain go.mod pins
+        run: echo "GOTOOLCHAIN=$(sed -n 's/^toolchain //p' go.mod)" >> "$GITHUB_ENV"
+
+      - name: manifest.embed.json follows filex-app.json
+        run: |
+          go generate ./...
+          git diff --exit-code -- manifest.embed.json
+
+      - name: Tests, then the bundle and the module
+        run: bash scripts/build.sh
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: media-thumbs
+          path: |
+            dist/plugin.wasm
+            dist/plugin.wasm.sha256
+            dist/ui.zip
+            dist/ui.zip.sha256
+            dist/filex-app.json
+          retention-days: 7
