@@ -25,8 +25,9 @@ open in filex's own viewer where it has one.
 The app needs **filex 0.50.0 or later** (apps that draw thumbnails came with
 0.50.0), with apps switched on (`FILEX_APP_PLUGINS_DISABLED` unset).
 
-- **From the store:** [apps.filex.sh](https://apps.filex.sh) → Media Thumb
-  Engine → **Install**, and give your filex's address. filex opens the same
+- **From the store** (filex 0.52.0 or later, which installs from a store
+  link): [apps.filex.sh/apps/media-thumbs](https://apps.filex.sh/apps/media-thumbs)
+  → **Install**, and give your filex's address. filex opens the same
   permission review as below, marked *From store apps.filex.sh*.
 - **From GitHub:** Admin → Plugins → Apps → **Install an app** → GitHub
   repository: `BRF-Tech/filex-media-thumbs`, **Ref:** the release's tag
