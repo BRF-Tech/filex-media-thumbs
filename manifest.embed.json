@@ -1,7 +1,7 @@
 {
   "manifest_version": 1,
   "name": "media-thumbs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "filex": ">=0.50.0",
   "label": {
     "en": "Media Thumb Engine",

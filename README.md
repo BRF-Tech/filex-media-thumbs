@@ -31,7 +31,7 @@ The app needs **filex 0.50.0 or later** (apps that draw thumbnails came with
   permission review as below, marked *From store apps.filex.sh*.
 - **From GitHub:** Admin → Plugins → Apps → **Install an app** → GitHub
   repository: `BRF-Tech/filex-media-thumbs`, **Ref:** the release's tag
-  (`v0.1.0`). filex reads `filex-app.json` at that tag, downloads
+  (`v0.1.1`). filex reads `filex-app.json` at that tag, downloads
   `plugin.wasm` and `ui.zip` from the release and refuses either unless it
   hashes to what the manifest pins.
 - **From files:** Admin → Plugins → Apps → Install an app → **Upload
@@ -132,7 +132,7 @@ no network permission, and its page runs with no network.
 
 ## Build
 
-You need **Go** (the toolchain `go.mod` pins, `go1.27.1`, is downloaded by Go
+You need **Go** (the toolchain `go.mod` pins, `go1.27.3`, is downloaded by Go
 itself) and **Node.js 20 or later** for the page's tests (no packages are
 installed).
 

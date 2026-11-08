@@ -9,10 +9,10 @@ from, and under which terms:
 |---|---|---|---|
 | [filex guest SDK](https://github.com/BRF-Tech/filex) (`github.com/brf-tech/filex/backend/pkg/pluginkit`) | v0.52.0 | MIT, BRF Tech | the exports filex calls, the host functions, `thumbkit` |
 | [Extism Go PDK](https://github.com/extism/go-pdk) (`github.com/extism/go-pdk`) | v1.1.3 | BSD-3-Clause, Dylibso, Inc. | the wasm ABI under the SDK |
-| [golang.org/x/image](https://pkg.go.dev/golang.org/x/image) | v0.39.0 | BSD-3-Clause, The Go Authors | font parsing and drawing (`font/sfnt`, `font/opentype`), WebP and TIFF decoding, scaling |
-| Go Mono (`golang.org/x/image/font/gofont/gomono`) | in x/image v0.39.0 | the Go fonts' license (BSD-3-Clause style), Bigelow & Holmes Inc. | the caption strip of a font's thumbnail |
-| [golang.org/x/text](https://pkg.go.dev/golang.org/x/text) | v0.40.0 | BSD-3-Clause, The Go Authors | Mac Roman font names |
-| [Brotli for Go](https://github.com/andybalholm/brotli) (`github.com/andybalholm/brotli`) | v1.2.6 | MIT, the Brotli Authors | WOFF2 decompression |
+| [golang.org/x/image](https://pkg.go.dev/golang.org/x/image) | v0.47.0 | BSD-3-Clause, The Go Authors | font parsing and drawing (`font/sfnt`, `font/opentype`), WebP and TIFF decoding, scaling |
+| Go Mono (`golang.org/x/image/font/gofont/gomono`) | in x/image v0.47.0 | the Go fonts' license (BSD-3-Clause style), Bigelow & Holmes Inc. | the caption strip of a font's thumbnail |
+| [golang.org/x/text](https://pkg.go.dev/golang.org/x/text) | v0.43.0 | BSD-3-Clause, The Go Authors | Mac Roman font names |
+| [Brotli for Go](https://github.com/andybalholm/brotli) (`github.com/andybalholm/brotli`) | v1.2.8 | MIT, the Brotli Authors | WOFF2 decompression |
 
 The Go standard library (BSD-3-Clause, The Go Authors) is linked into the
 module too.

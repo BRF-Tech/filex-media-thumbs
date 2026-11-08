@@ -9,6 +9,24 @@ update (`go run ./tools/notes <version>`).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-11-08
+
+A patch release: the libraries the module is built from and the compiler
+move to their current versions. The thumbnails, the preview page and the
+permissions are the same, and it still needs filex 0.50.0 or later.
+
+### Changed
+
+- **Dependencies:** `github.com/andybalholm/brotli` v1.2.6 → v1.2.8 (WOFF2),
+  `golang.org/x/image` v0.39.0 → v0.47.0 (fonts, WebP, TIFF, scaling) and
+  `golang.org/x/text` v0.40.0 → v0.43.0. `go.mod` says `go 1.26.0`, the
+  version these `golang.org/x` modules ask for. THIRD_PARTY_NOTICES.md names
+  the new versions.
+- **Compiler:** the toolchain `go.mod` pins is `go1.27.3`, was `go1.27.1`.
+- CI: the GitHub Actions are pinned by commit SHA, at their current
+  versions (checkout v7.0.1, setup-go v7.0.0, setup-node v7.1.0,
+  upload-artifact v7.0.2, action-gh-release v3.0.4).
+
 ## [0.1.0] - 2026-10-07
 
 The first version: thumbnails and a preview for design files and fonts, as a

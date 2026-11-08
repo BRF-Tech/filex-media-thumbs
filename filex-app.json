@@ -1,7 +1,7 @@
 {
   "manifest_version": 1,
   "name": "media-thumbs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "filex": ">=0.50.0",
   "label": {
     "en": "Media Thumb Engine",
@@ -100,6 +100,6 @@
   },
   "wasm": {
     "url": "https://github.com/BRF-Tech/filex-media-thumbs/releases/download/{tag}/plugin.wasm",
-    "sha256": "a2010962a4dd9b28fc0ca6edba9b2810f7c0514eb09c7ae32b46bd58bc80326f"
+    "sha256": "469df8153953c01413c0d017afda825949d5d725ae2338273b0a903ce8378235"
   }
 }
