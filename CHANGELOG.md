@@ -9,6 +9,10 @@ update (`go run ./tools/notes <version>`).
 
 ## [Unreleased]
 
+### Changed
+
+- golang.org/x/sys v0.50.0 (was v0.49.0).
+
 ## [0.1.1] - 2026-11-08
 
 A patch release: the libraries the module is built from and the compiler
