@@ -9,6 +9,8 @@ update (`go run ./tools/notes <version>`).
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-11-10
+
 ### Changed
 
 - golang.org/x/sys v0.50.0 (was v0.49.0).
