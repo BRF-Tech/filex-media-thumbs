@@ -12,6 +12,7 @@ update (`go run ./tools/notes <version>`).
 ### Changed
 
 - golang.org/x/sys v0.50.0 (was v0.49.0).
+- github.com/andybalholm/brotli v1.3.0 (was v1.2.8).
 
 ## [0.1.1] - 2026-11-08
 

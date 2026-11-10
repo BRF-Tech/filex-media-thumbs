@@ -100,6 +100,6 @@
   },
   "wasm": {
     "url": "https://github.com/BRF-Tech/filex-media-thumbs/releases/download/{tag}/plugin.wasm",
-    "sha256": "469df8153953c01413c0d017afda825949d5d725ae2338273b0a903ce8378235"
+    "sha256": "5b5c4fad56c4820b35dbc5bbf49de5e164eaff4fcca08048daac1bcdb9cee400"
   }
 }
