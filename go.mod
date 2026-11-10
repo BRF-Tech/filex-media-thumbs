@@ -8,7 +8,7 @@ require (
 	github.com/andybalholm/brotli v1.2.8
 	github.com/brf-tech/filex/backend v0.52.0
 	golang.org/x/image v0.47.0
-	golang.org/x/text v0.43.0
+	golang.org/x/text v0.44.0
 )
 
 require (
